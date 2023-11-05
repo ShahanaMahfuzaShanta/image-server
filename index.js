@@ -6,19 +6,20 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
-    credentials: true,
-  };
-  
-  app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", corsOptions.origin);
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-  });
+  origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://image-gallery-two-zeta.vercel.app"],
+  credentials: true,
+};
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", corsOptions.origin.join(', ')); // Join the origins into a single string
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 
 //middlewares
 app.use(cors(corsOptions));
